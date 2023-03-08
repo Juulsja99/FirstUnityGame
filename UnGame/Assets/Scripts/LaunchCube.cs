@@ -13,9 +13,9 @@ public class LaunchCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey("space"))
         {
-            this.gameObject.GetComponent<Rigidbody>().AddForce(0, 1000, 0, ForceMode.Acceleration);
+            this.gameObject.GetComponent<Rigidbody>().AddForce(0, 10, 0, ForceMode.Acceleration);
         }
 
     }
