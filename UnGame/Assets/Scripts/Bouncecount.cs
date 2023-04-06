@@ -4,12 +4,42 @@ using UnityEngine;
 
 public class Bouncecount : MonoBehaviour
 {
+    private Rigidbody rb;
     public int counter = 0;
+    private bool OnFloor = false;
+    private counterUI scoreScript;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    void Start()
     {
-        counter += 1;
-        Debug.Log(collision.collider.name);
-        Debug.Log(counter);
+        rb = gameObject.GetComponent<Rigidbody>();
+        scoreScript = FindObjectOfType<counterUI>();
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            OnFloor = true;
+            counter += 1;
+            Debug.Log("Bounce");
+            scoreScript.AddScore(+1);
+
+        }
+
+          
+       
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            OnFloor = false;
+        }
+
+    }
+
+
 }

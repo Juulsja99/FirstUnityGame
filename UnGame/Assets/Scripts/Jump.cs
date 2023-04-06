@@ -6,13 +6,8 @@ public class Jump : MonoBehaviour
 {
     private Rigidbody rb;
     public float force = 20f;
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "floor")
-        {
-            onFloor = true;
-        }
-    }
+    private bool OnFloor = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +18,32 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onFloor == true)
+        if (Input.GetKeyDown(KeyCode.Space) && OnFloor == true)
         {
             rb.AddForce(Vector3.up * force);
         }
+
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            OnFloor = true;
+        }
+        
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            OnFloor = false;
+        }
+
+    }
+
+
+
+
 }
