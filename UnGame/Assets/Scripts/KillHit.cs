@@ -7,8 +7,8 @@ public class KillHit : MonoBehaviour
 {
 
     public string targetTag;
-    public GameObject effect;
     private AudioSource sound;
+    public ParticleSystem schiet;
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +26,19 @@ public class KillHit : MonoBehaviour
     {
         if (coll.gameObject.tag == targetTag)
         {
+            schiet.Play();
             Debug.Log("Hit");
+            Destroy(coll.gameObject, 0.1f);
         }
     }
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.tag == targetTag)
         {
+            schiet.Play();
             Debug.Log("Hit");
             Destroy(coll.gameObject, 0.1f);
+            
         }
     }
 }
